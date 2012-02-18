@@ -14,7 +14,7 @@ Routing读取controllers文件夹内的xxxController.js文件，并缓存所有a
 
   以下controllers是目录结构
   
-    ---                             controllers文件夹(可自定义文件夹，在config.js内修改) 
+    --- controllers/                controllers文件夹(可自定义文件夹，在config.js内修改) 
      |---- indexController.js       controller文件(必须有Controller，可自定义在config.js内修改)
      |     |---- indexAction        action函数(必须有Action，课自定在config.js内修改)
      |     |---- signupAction
@@ -30,7 +30,7 @@ Routing读取controllers文件夹内的xxxController.js文件，并缓存所有a
            
   以下views是目录结构
   
-    ---                            views文件夹(可自定义文件夹，在config.js内修改)
+    --- views/                     views文件夹(可自定义文件夹，在config.js内修改)
      |---- index/                  controller文件(必须有Controller，可自定义在config.js内修改)
      |     |---- index.html        action函数(必须有Action，课自定在config.js内修改)
      |     |---- signup.html
@@ -72,37 +72,27 @@ customRoute函数接受一个函数参数，用于自定义路由，拥有最高
 
 例：
 
-  routing.customRoute(function() {
-
-    routing.app.get('/index',function(req,res,next) {
-
-      .........
-
-    }) 
-
-    routing.app.post('/:id',function(req,res,next) {
-
-      .........
-
+    routing.customRoute(function() {
+    
+        routing.app.get('/index',function(req,res,next) {
+          .........
+        })
+        
+        routing.app.post('/:id',function(req,res,next) {
+          .........
+        })
     })
 
-  })
-
-routing.customRoute(function() {
-
-    this.all('/index/user',function(req,res,next) {
-
-      .........
-
-    }) 
-
-    this.post('/:id',function(req,res,next) {
-
-      .........
-
+    routing.customRoute(function() {
+    
+        this.all('/index/user',function(req,res,next) {
+          .........
+        }) 
+        
+        this.post('/:id',function(req,res,next) {
+          .........
+        })
     })
-
-  })
 
 参数函数内推荐使用this定义路由，定义方法和express定义路由相同，this.get()|this.post()|this.all()....
 
