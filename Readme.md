@@ -47,13 +47,13 @@ Routing读取controllers文件夹内的xxxController.js文件，并缓存所有a
 
 
 
-1、当接受请求为/index/index时，自动路由到indexController.js内的indexAction函数,默认action为index(可在config.js内修改)，默认controller为indexController(可修改)
+1. 当接受请求为/index/index时，自动路由到indexController.js内的indexAction函数,默认action为index(可在config.js内修改)，默认controller为indexController(可修改)
 
-2、当接受请求为/index/index/id/123/type/submit时，自动路由同上，action函数内可获取参数,使用request.params['id']可以获取得值123，request.params['type']可以获取得值'submit'
+2. 当接受请求为/index/index/id/123/type/submit时，自动路由同上，action函数内可获取参数,使用request.params['id']可以获取得值123，request.params['type']可以获取得值'submit'
 
-3、自动路由没有找到对应action则抛出404错误转由错误视图控制，详见**错误视图**
+3. 自动路由没有找到对应action则抛出404错误转由错误视图控制，详见**错误视图**
 
-4、action函数内可以使用respon.template函数调用对应views下相应视图
+4. action函数内可以使用respon.template函数调用对应views下相应视图
 
 ####关于错误视图
 
@@ -94,7 +94,7 @@ customRoute函数接受一个函数参数，用于自定义路由，拥有最高
         })
     })
 
-参数函数内推荐使用this定义路由，定义方法和express定义路由相同，this.get()|this.post()|this.all()....
+参数函数内推荐使用this定义路由，定义方法和express定义路由相同，`this.get()|this.post()|this.all()`....
 
 **listen**
 
@@ -116,8 +116,10 @@ routing依赖于express  使用前请先确认express已经安装
 
 ####其他
 
-1.Routing已经配置好生产环境(production)和开发环境(development)
+>1.Routing已经配置好生产环境(production)和开发环境(development)
 
-2.默认存放controller文件夹为/controllers，默认使用ejs模板引擎
+>2.默认存放controller文件夹为/controllers，默认使用ejs模板引擎
 
-3.静态文件不会使用到自动路由
+>3.静态文件不会使用到自动路由
+
+>4.须自己修改config.js文件
