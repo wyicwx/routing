@@ -58,9 +58,13 @@ Routing读取controllers文件夹内的xxxController.js文件，并缓存所有a
 ####关于错误视图
 
 启用错误视图请确认设置
+
 config.js文件内config.debug = 0;
+
 任何时刻抛出错误都可以在错误视图中捕获并调用对应视图，默认调用500视图对象
+
 throw new Error('404') 会调用已定义的404错误视图
+
 可以用使用routing.errorCode对象自定义视图，默认只有404和500视图
 
 ####关于api
@@ -110,16 +114,16 @@ routing.errorCode     存储存储错误视图对象
 
 ####安装
 
-安装方法 npm install express routing
+>安装方法 npm install express routing
 
-routing依赖于express  使用前请先确认express已经安装
+>routing依赖于express  使用前请先确认express已经安装
 
 ####其他
 
->1.Routing已经配置好生产环境(production)和开发环境(development)
+>1. Routing已经配置好生产环境(production)和开发环境(development)
 
->2.默认存放controller文件夹为/controllers，默认使用ejs模板引擎
+>2. 默认存放controller文件夹为/controllers，默认使用ejs模板引擎
 
->3.静态文件不会使用到自动路由
+>3. 静态文件不会使用到自动路由
 
->4.须自己修改config.js文件
+>4. 须自己修改config.js文件
