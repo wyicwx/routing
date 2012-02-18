@@ -114,9 +114,9 @@ routing.errorCode     存储存储错误视图对象
 
 ####安装
 
->安装方法 npm install express routing
+>安装方法 npm install routing
 
->routing依赖于express  使用前请先确认express已经安装
+>routing依赖于express  已经依赖了express不需要再安装express
 
 ####其他
 

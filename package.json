@@ -2,11 +2,18 @@
   "name": "routing",
   "description": "Automatic routing based on express",
   "version": "0.0.1",
-  "author": "Chen Weixin <wyicwx@gmail.com>",
+  "author": "Chen Weixin <wyicwx@gmail.com> (http://weibo.com/236008243)",
   "dependencies": {
     "express": "2.5.8",
     "ejs": "0.5.0"
   },
-  "repository": "https://github.com/wyicwx/routing",
-  "main": "index"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wyicwx/routing.git"
+  },
+  "main": "index",
+  "devDependencies": {},
+  "engines": {
+    "node": "*"
+  }
 }
