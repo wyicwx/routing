@@ -10,7 +10,8 @@ var routing = require('routing');
 Routing读取controllers文件夹内的xxxController.js文件，并缓存所有action函数
 
 例：
-  以下controllers是目录结构<br>
+  以下controllers是目录结构
+<code>
   --- controllers/                  controllers文件夹(可自定义文件夹，在config.js内修改)  
      |---- indexController.js       controller文件(必须有Controller，可自定义在config.js内修改)
      |     |---- indexAction        action函数(必须有Action，课自定在config.js内修改)
@@ -24,7 +25,7 @@ Routing读取controllers文件夹内的xxxController.js文件，并缓存所有a
      |---- topic/
            |---- indexController.js
            |---- ....
-
+</code>
   以下views是目录结构
   --- views/                  controllers文件夹(可自定义文件夹，在config.js内修改)
      |---- index/       controller文件(必须有Controller，可自定义在config.js内修改)
