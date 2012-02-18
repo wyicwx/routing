@@ -63,7 +63,7 @@ config.js文件内config.debug = 0;
 
 任何时刻抛出错误都可以在错误视图中捕获并调用对应视图，默认调用500视图对象
 
-throw new Error('404') 会调用已定义的404错误视图
+例：throw new Error('404') 会调用已定义的404错误视图
 
 可以用使用routing.errorCode对象自定义视图，默认只有404和500视图
 
