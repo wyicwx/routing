@@ -1,7 +1,7 @@
 {
   "name": "routing",
   "description": "Automatic routing based on express",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Chen Weixin <wyicwx@gmail.com> (http://weibo.com/236008243)",
   "dependencies": {
     "express": ">=2.5.8",

@@ -15,13 +15,13 @@ var Routing = exports,
 	path = require('path'),
 	errorCode = Routing.errorCode = require('./error.js').errorCode,
 	stringBuffer = require('./lib/libString.js').stringBuffer,
-	app = Routing.app;
+	app = Routing.app = {};
 
 
 function init() {
 
 	//存储controller对象
-	app = Routing.app = express.createServer(),
+	app = express.createServer(),
 		controllers = Routing.controllers = require('./controllers.js').controllers,
 		template = require(config.template);
 

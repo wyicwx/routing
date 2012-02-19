@@ -69,23 +69,24 @@ config.js文件内config.debug = 0;
 
 ####关于api
 
+**configure**
+
+configure函数可以配置config.js的参数，而不用去修改config.js,参数允许传入一个对象
+
+例：
+    routing.configure({
+        'web_default':'home',
+        'controller_default':'home',
+        'debug':1
+    })
+
+参数请参阅config.js
 
 **customRoute**
 
 customRoute函数接受一个函数参数，用于自定义路由，拥有最高优先级，允许多次调用
 
 例：
-
-    routing.customRoute(function() {
-    
-        routing.app.get('/index',function(req,res,next) {
-          .........
-        })
-        
-        routing.app.post('/:id',function(req,res,next) {
-          .........
-        })
-    })
 
     routing.customRoute(function() {
     
@@ -98,15 +99,15 @@ customRoute函数接受一个函数参数，用于自定义路由，拥有最高
         })
     })
 
-参数函数内推荐使用this定义路由，定义方法和express定义路由相同，`this.get()|this.post()|this.all()`....
+参数函数内使用this定义路由，定义方法和express定义路由相同，`this.get()|this.post()|this.all()`....
 
 **listen**
 
-listen函数用于配置好后开启服务routing.listen(80);
+listen函数用于配置好后初始化Routing并开启服务routing.listen(80);
 
 **其他变量**
 
-routing.app           存储express的server实例
+routing.app           存储express的server实例(调用后listen函数后使用)
 
 routing.controllers   存储缓存的controller对象
 
