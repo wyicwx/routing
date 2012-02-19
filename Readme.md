@@ -4,8 +4,6 @@
 
 Routing是基于**express**的自动设置路由模块
 
-var routing = require('routing');
-
 ####关于自动路由
 
 Routing读取controllers文件夹内的xxxController.js文件，并缓存所有action函数
@@ -14,9 +12,9 @@ Routing读取controllers文件夹内的xxxController.js文件，并缓存所有a
 
   以下controllers是目录结构
   
-    --- controllers/                controllers文件夹(可自定义文件夹，在config.js内修改) 
-     |---- indexController.js       controller文件(必须有Controller，可自定义在config.js内修改)
-     |     |---- indexAction        action函数(必须有Action，课自定在config.js内修改)
+    --- controllers/                controllers文件夹
+     |---- indexController.js       controller文件
+     |     |---- indexAction        action函数
      |     |---- signupAction
      |     |---- ....
      |
@@ -30,9 +28,9 @@ Routing读取controllers文件夹内的xxxController.js文件，并缓存所有a
            
   以下views是目录结构
   
-    --- views/                     views文件夹(可自定义文件夹，在config.js内修改)
-     |---- index/                  controller文件(必须有Controller，可自定义在config.js内修改)
-     |     |---- index.html        action函数(必须有Action，课自定在config.js内修改)
+    --- views/                     views文件夹
+     |---- index/                  对应controller的文件夹
+     |     |---- index.html        对应action的文件夹
      |     |---- signup.html
      |     |---- layout.html
      |     |---- ....
@@ -47,7 +45,7 @@ Routing读取controllers文件夹内的xxxController.js文件，并缓存所有a
 
 
 
-1. 当接受请求为/index/index时，自动路由到indexController.js内的indexAction函数,默认action为index(可在config.js内修改)，默认controller为indexController(可修改)
+1. 当接受请求为/index/index时，自动路由到indexController.js内的indexAction函数,默认action为index，默认controller为indexController(可修改)
 
 2. 当接受请求为/index/index/id/123/type/submit时，自动路由同上，action函数内可获取参数,使用request.params['id']可以获取得值123，request.params['type']可以获取得值'submit'
 
@@ -59,7 +57,7 @@ Routing读取controllers文件夹内的xxxController.js文件，并缓存所有a
 
 启用错误视图请确认设置
 
-config.js文件内config.debug = 0;
+使用configure设置{"config.debug":0};
 
 任何时刻抛出错误都可以在错误视图中捕获并调用对应视图，默认调用500视图对象
 
@@ -81,6 +79,12 @@ configure函数可以配置config.js的参数，而不用去修改config.js,参�
     })
 
 参数请参阅config.js
+
+注：configure函数需要init函数使用前调用,其他函数须执行init函数后执行
+
+**init**
+
+初始化Routing(必须)
 
 **customRoute**
 
@@ -107,17 +111,25 @@ listen函数用于配置好后初始化Routing并开启服务routing.listen(80);
 
 **其他变量**
 
-routing.app           存储express的server实例(调用后listen函数后使用)
+routing.app           存储express的server实例
 
 routing.controllers   存储缓存的controller对象
 
 routing.errorCode     存储存储错误视图对象
 
-####安装
+注：以上对象需要在调用init函数后使用
+
+####安装和使用
 
 >安装方法 npm install routing
 
 >routing依赖于express  已经依赖了express不需要再安装express
+
+`var routing = require('routing');`
+
+`routing.init();`
+
+`routing.listen(80);`
 
 ####其他
 
@@ -126,5 +138,3 @@ routing.errorCode     存储存储错误视图对象
 >2. 默认存放controller文件夹为/controllers，默认使用ejs模板引擎
 
 >3. 静态文件不会使用到自动路由
-
->4. 须自己修改config.js文件

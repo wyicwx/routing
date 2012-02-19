@@ -15,10 +15,11 @@ var Routing = exports,
 	path = require('path'),
 	errorCode = Routing.errorCode = require('./error.js').errorCode,
 	stringBuffer = require('./lib/libString.js').stringBuffer,
-	app = Routing.app = {};
+	app = Routing.app = {},
+	inited = false;
 
 
-function init() {
+Routing.init = function() {
 
 	//存储controller对象
 	app = express.createServer(),
@@ -57,6 +58,7 @@ function init() {
 		});
 	};
 
+	inited = true;
 };
 
 
@@ -65,11 +67,7 @@ var publicFile = new RegExp(/\..*$/),
 	custom = [],
 	ports;
 
-//设置自定义路由解析
-Routing.customRoute = function(fn) {			//fn函数内用this或者Routing.app来指定express的server对象
-	custom.push(fn);
-}
-
+//配置config函数
 Routing.configure = function(obj) {
 	for(var i in obj) {
 		if(i == 'rootPath') {
@@ -82,12 +80,19 @@ Routing.configure = function(obj) {
 	}
 }
 
+//设置自定义路由解析
+Routing.customRoute = function(fn) {			//fn函数内用this或者Routing.app来指定express的server对象
+	custom.push(fn);
+}
+
 Routing.listen = function(p) {
 	if(ports) return;
 	ports = p;
 
-	//初始化express
-	init();
+	if(!inited) {
+		console.log('Please use init() first');
+		return;
+	}
 
 	//设置自定义路由解析
 	for(var i in custom) custom[i].call(app);
