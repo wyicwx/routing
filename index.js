@@ -10,64 +10,82 @@
 
 var Routing = exports,
 	config = require('./config.js'),
-	controllers = require('./controllers.js').controllers,
 	express = require('express'),
 	url = require('url'),
 	path = require('path'),
 	errorCode = Routing.errorCode = require('./error.js').errorCode,
-	stringBuffer = require('./lib/libString.js').stringBuffer,
-	template = require(config.template);
+	stringBuffer = require('./lib/libString.js').stringBuffer;
 
-var app = Routing.app = express.createServer();
+function init() {
 
-app.configure(function() {
-	app.set('view engine',config.templateExtension);
-	app.set('view',config.viewsDir);		
-	app.register('html',template);					
-	app.use(express.cookieParser());				
-	app.use(express.bodyParser());					
-	app.use(express.session({secret:config.session_secret}));	
-});
+	//存储controller对象
+	var app = Routing.app = express.createServer(),
+		controllers = Routing.controllers = require('./controllers.js').controllers,
+		template = require(config.template);
 
-app.configure('development', function() {
-	app.use(express.static(config.rootPath + '/public'));
-	app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
-});
+	app.configure(function() {
+		app.set('view engine',config.templateExtension);
+		app.set('view',config.viewsDir);		
+		app.register('html',template);					
+		app.use(express.cookieParser());				
+		app.use(express.bodyParser());					
+		app.use(express.session({secret:config.session_secret}));	
+	});
 
-app.configure('production', function() {
-	app.use(express.static(config.rootPath + '/public',{maxAge:static_maxage}));
-	app.use(express.errorHandler()); 
-	app.set('view cache',true);
-});
+	app.configure('development', function() {
+		app.use(express.static(config.rootPath + '/public'));
+		app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+	});
+
+	app.configure('production', function() {
+		app.use(express.static(config.rootPath + '/public',{maxAge:static_maxage}));
+		app.use(express.errorHandler()); 
+		app.set('view cache',true);
+	});
+
+	//错误解析设置
+	if(!config.debug) {
+		app.error(function(err, req, res, next) {
+			for(var i in errorCode) {
+				if(err.message == i) {
+					return errorCode[i](req,res,next);
+				}
+			}
+			return errorCode['500'](req,res,next);
+		});
+	};
+
+};
+
 
 //不用route解析的文件
 var publicFile = new RegExp(/\..*$/),
 	custom = [],
 	ports;
 
-//错误解析设置
-if(!config.debug) {
-	app.error(function(err, req, res, next) {
-		for(var i in errorCode) {
-			if(err.message == i) {
-				return errorCode[i](req,res,next);
-			}
-		}
-		return errorCode['500'](req,res,next);
-	});
-};
-
-//存储controller对象
-Routing.controllers = controllers;
-
 //设置自定义路由解析
 Routing.customRoute = function(fn) {			//fn函数内用this或者Routing.app来指定express的server对象
 	custom.push(fn);
 }
 
+Routing.configure = function(obj) {
+	for(var i in obj) {
+		if(i == 'rootPath') {
+			if(config['controllersDir'].match(config['rootPath']+'/controllers'))	
+				config['controllersDir'] = obj[i] + '/controllers';
+			if(config['viewsDir'].match(config['rootPath'])+'/views')
+				config['viewsDir'] = obj[i] + '/views';
+		}
+		config[i] = obj[i];
+	}
+}
+
 Routing.listen = function(p) {
 	if(ports) return;
 	ports = p;
+
+	//初始化express
+	init();
 
 	//设置自定义路由解析
 	for(var i in custom) custom[i].call(app);
