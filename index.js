@@ -9,17 +9,19 @@
  */
 
 var Routing = exports,
-	config = require('./config.js'),
+	config = Routing.config = require('./config.js'),
 	express = require('express'),
 	url = require('url'),
 	path = require('path'),
 	errorCode = Routing.errorCode = require('./error.js').errorCode,
-	stringBuffer = require('./lib/libString.js').stringBuffer;
+	stringBuffer = require('./lib/libString.js').stringBuffer,
+	app = Routing.app;
+
 
 function init() {
 
 	//存储controller对象
-	var app = Routing.app = express.createServer(),
+	app = Routing.app = express.createServer(),
 		controllers = Routing.controllers = require('./controllers.js').controllers,
 		template = require(config.template);
 

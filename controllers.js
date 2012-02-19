@@ -1,4 +1,4 @@
-var config = require('./config.js'),
+var config = require('./index.js').config,
 	fs 	   = require('fs'),
 	stringBuffer   = require('./lib/libString.js').stringBuffer,
 	controllersDir = config.controllersDir,	//controller路径
