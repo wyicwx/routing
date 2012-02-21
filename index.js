@@ -41,7 +41,7 @@ Routing.init = function() {
 	});
 
 	app.configure('production', function() {
-		app.use(express.static(config.rootPath + '/public',{maxAge:static_maxage}));
+		app.use(express.static(config.rootPath + '/public',{maxAge:config.static_maxage}));
 		app.use(express.errorHandler()); 
 		app.set('view cache',true);
 	});
