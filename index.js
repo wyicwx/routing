@@ -22,7 +22,7 @@ var Routing = exports,
 Routing.init = function() {
 
 	//存储controller对象
-	app = express.createServer(),
+	app = Routing.app = express.createServer(),
 		controllers = Routing.controllers = require('./controllers.js').controllers,
 		template = require(config.template);
 
