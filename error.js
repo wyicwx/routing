@@ -1,4 +1,4 @@
-exports.errorCode = {
+module.exports = {
 	'404':function(req,res,next) {
 		var body = '404 Not Found';
 		res.writeHead(404, {

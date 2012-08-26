@@ -138,7 +138,3 @@ routing.errorCode     存储存储错误视图对象
 >2. 默认存放controller文件夹为/controllers，默认使用ejs模板引擎
 
 >3. 静态文件不会使用到自动路由
-
-###版权和许可
-
-基于 [MIT License](http://en.wikipedia.org/wiki/MIT_License) 开源。版权属于[wyicwx](https://github.com/wyicwx) 所有，作者 wyicwx 具有作品署名权。

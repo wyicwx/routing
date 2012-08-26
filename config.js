@@ -33,6 +33,9 @@ config.controllersDir = config.rootPath + '/controllers';
 //自定义controller文件的后缀
 config.controllerExtension = 'Controller';
 
+//自定义models目录
+config.modelsDir = config.rootPath + '/models';
+
 //自定义views文件夹
 config.viewsDir = config.rootPath + '/views';
 
